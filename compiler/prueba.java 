@@ -1,0 +1,9 @@
+public class Nombre {
+    public int metodoA(int a, double b, int x){
+        x= a+ (h*v)-34*sd
+    }
+    private intatribx, y, z;
+    public int metodoB (){}
+    public double a,b,c;
+
+}
