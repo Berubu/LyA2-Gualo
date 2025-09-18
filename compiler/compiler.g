@@ -6,7 +6,7 @@ grammar compiler;
 @members {
     HashMap TLS = new HashMap();
     public void addSym(String id, String tipo){
-        System
+        System.out,println("Agregando id: "+ id " tipo:" + tipo );
     }
 }
 
@@ -21,8 +21,12 @@ method      : accessModif tipo ID '(' delc_of_args? ')'
 
 property    : accessModiftipo ID (',' ID) SEMICOLON     ;
 
-
-delc_of_args: t1=tipo id1=ID{} (',' t2=tipo id2=ID {} )*                    ;
+                //int a, double b , double c
+                //tipo ID (',' tipo ID)*
+delc_of_args: t1=tipo id1=ID{addSys($id1.text,$t1.text);} 
+                (',' t2=tipo id2=ID {addSys($id2.text,$t2.text);} )*;
+                //I¿int a, b, c
+                //tipo ID (',' ID)*
 delc_local  : tipo id1=ID 
                         {addSys($id1.text, $tipo.text)  ;
                         }
@@ -58,3 +62,4 @@ CINT    : ('0'..'9')+ ;
 ID      : ('a'..'z'|'A'..'Z'|'') ('a'..'z'|'A'..'Z'|''|'0'..'9')* ;
 
 WS      : (' ' | '\n' | '\r' | '\t')+ { $channel = HIDDEN; } ;
+
