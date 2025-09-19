@@ -38,13 +38,31 @@ tipo        : INT | DOUBLE                              ;
 
 sentences   : assignament | delc_local                  ;
 
-assignment  : ID '=' expr SEMICOLON                     ;
-expr        : multExpr (('+'|'-') multExpr)*            ;
-multExpr    : atom ('*' atom)*                          ;
-atom        : CINT   
-            | CFLOAT 
+assignment  : ID '=' expr 
+        {system.out.println("Tipo de expr es: "+$expr.eType);
+                         }SEMICOLON                     ;
+
+
+expr  returns [int eType]:
+                  m1=multExpr {$eType=a1.mType; }
+                  (('+'|'-') m2=multExpr  
+                  {if (m1.mType!=m2.mType)$eType=3;} 
+                  )*                                    ;
+
+
+multExpr returns [int mType]:
+                a1=atom {$mType=a1.aType; }
+                 ('*' a2=atom {if(a1.aType!=a2.aType)
+                 $mType=3; 
+                })*                         ;
+
+
+atom  returns [int aType]   
+            : CINT    {$aType = 1;}
+            | CF LOAT {$aType = 2;}
             | ID 
-            | '(' expr ')'                              ;
+            | '(' expr ')'  {$aType = $expr.eType; }    ;
+
 
 accessModif : PUBLIC | PRIVATE | PROTECTED              ;
 INT     : 'int';
