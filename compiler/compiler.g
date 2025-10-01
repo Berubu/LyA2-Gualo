@@ -6,24 +6,23 @@ grammar compiler;
 }
 
 @members {
-    // Pila de scops cada scop es un HashMap de variables locales
+    // pila de scops cada scop es un HashMap de variables locales
     Stack<HashMap<String, Integer>> scopes = new Stack<>();
 
-    // Entramos a un nuevo scope (método o bloque)
+    //un nuevo scope método
     public void enterScope() {
         scopes.push(new HashMap<String, Integer>());
     }
-
     // Salimos de un scope
     public void exitScope() {
         scopes.pop();
     }
 
-    // Agregar símbolo al scope actual de la tabla de simbolos 
+    // Agregar símbolo al ambito actual de la tabla de simbolos 
     public void addSym(String id, String tipo) {
         HashMap<String,Integer> currentScope = scopes.peek();
 
-        if(currentScope.containsKey(id)) {
+        if(currentScope.containsKey(id)) { //revisa que el nombre de la variabe id ya existe en la tabla  o en el ambito 
             System.out.println("ID " + id + " ya declarada en este scope");
             return;
         }
@@ -66,7 +65,7 @@ method:
         sentences* 
     CCURLYB {exitScope();}
 ;
-
+//declarar el clear 
 
 property
     : accessModif t1=tipo id1=ID { addSym($id1.text, $t1.text); }
