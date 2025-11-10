@@ -9,17 +9,12 @@ class CodeGenerator(WebGenVisitor):
         self.css = []
         self.crud_spec = {}
 
-    # --- Métodos de Ayuda ---
-    
-    # Quita las comillas de un token STRING (rectas o inteligentes)
     def unquote(self, text):
         if text.startswith('"') and text.endswith('"'):
             return text[1:-1]
         if text.startswith('“') and text.endswith('”'):
             return text[1:-1]
         return text
-
-    # --- Métodos del Visitor ---
 
     def visitPagina(self, ctx:WebGenParser.PaginaContext):
         self.html.append("<!DOCTYPE html>")
@@ -60,7 +55,6 @@ class CodeGenerator(WebGenVisitor):
         self.css.append(".main-menu a { color: white; padding: 10px 15px; text-decoration: none; }")
         self.css.append(".main-menu a:hover { background: #555; }")
 
-    # ---- ¡ESTA ES LA FUNCIÓN ACTUALIZADA! ----
     def visitSeccionImagenes(self, ctx:WebGenParser.SeccionImagenesContext):
         self.html.append("    <div class='image-gallery'>")
         
