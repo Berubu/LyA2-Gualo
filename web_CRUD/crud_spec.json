@@ -1,0 +1,9 @@
+{
+    "database": "Empresa",
+    "table": "Productos",
+    "fields": [
+        "Nombre",
+        "Precio",
+        "Clave"
+    ]
+}
